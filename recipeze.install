@@ -1,0 +1,41 @@
+<?php
+
+function recipeze_uninstall(){
+    drupal_uninstall_schema('recipeze');
+  
+}
+  
+function recipeze_enable() {
+    if (db_table_exists('recipeze') == FALSE) {
+		drupal_install_schema('recipeze');
+    }
+
+
+}  
+
+function recipeze_disable() {
+    if (db_table_exists('recipeze') == TRUE) {
+		drupal_uninstall_schema('recipeze');
+		db_query('DROP TABLE {recipeze}');
+    }
+   
+}
+
+function recipeze_schema() {
+    $schema = array();
+    $schema['recipeze'] = array(
+        'description' => 'recipeze',
+        'fields' => array(
+            'id' => array(
+            'description' => 'id',
+            'type' => 'serial',
+            'unsigned' => true,
+            'not null' => true
+            ),
+        ),
+        'primary key' => array('id')
+    );
+  
+    
+    return $schema;
+}

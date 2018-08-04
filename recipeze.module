@@ -1,0 +1,29 @@
+<?php 
+
+function recipeze_init(){
+    drupal_add_css(drupal_get_path('module','recipeze').'/css/recipeze_style.css');
+    drupal_add_js(drupal_get_path('module','recipeze').'/js/recipeze_jfunctions.js');
+}
+function recipeze_menu(){
+	$items = array();
+	$items['custom/recipeze/index'] = array(
+		'title'            => t('Custom module'),
+		'page callback'    => 'recipeze_index_action',
+		'access arguments' => array('access content'),
+		'type'             => MENU_LOCAL_TASK,
+	);
+
+	return $items;
+}
+
+function recipeze_theme(){
+	 return array(
+		'recipeze_index' => array(
+			'template' => 'recipeze_index'
+		)
+	);
+}
+function recipeze_index_action(){
+	 return theme('recipeze_index', array());
+}
+
